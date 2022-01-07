@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.newsspace.Profile"
+        android:name="com.example.newsspace.views.Profile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/feedsFragment"
-        android:name="com.example.newsspace.FeedsFragment"
+        android:name="com.example.newsspace.views.FeedsFragment"
         android:label="fragment_feeds"
         tools:layout="@layout/fragment_feeds" />
     <fragment
         android:id="@+id/societies"
-        android:name="com.example.newsspace.Societies"
+        android:name="com.example.newsspace.views.Societies"
         android:label="fragment_societies"
         tools:layout="@layout/fragment_societies" />
     <fragment
         android:id="@+id/createEventFragment"
-        android:name="com.example.newsspace.CreateEventFragment"
+        android:name="com.example.newsspace.views.CreateEventFragment"
         android:label="fragment_create_event"
         tools:layout="@layout/fragment_create_event" />
 </navigation>

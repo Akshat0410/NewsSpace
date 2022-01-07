@@ -2,4 +2,11 @@
     <string name="app_name">NewsSpace</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="anupam_prakash">Anupam Prakash</string>
+    <string name="email_id">Email Id</string>
+    <string name="anupamp74_gmail_com">anupamp74@gmail.com</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="_7909043762">7909043762</string>
+    <string name="profile">Profile</string>
 </resources>
