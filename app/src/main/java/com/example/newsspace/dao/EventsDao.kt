@@ -12,7 +12,7 @@ import kotlinx.coroutines.tasks.await
 class EventsDao {
 
     private val db = FirebaseFirestore.getInstance()
-    private val postCollection = db.collection("events")
+    val postCollection = db.collection("events")
     private val auth = Firebase.auth
 
     fun createEvent(title: String, eventDesc: String, eventPic: String, eventDate: String) {
