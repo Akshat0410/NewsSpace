@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.Profile">
+    tools:context=".views.fragments.Profile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="1dp"
             android:background="@null"
-            android:hint="@string/anupam_prakash"
+            android:hint=""
             android:padding="10dp"
             android:textColor="#A59A9A"
             android:textSize="18sp"
@@ -93,7 +93,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="1dp"
             android:background="@null"
-            android:hint="@string/anupamp74_gmail_com"
+            android:hint=""
             android:padding="10dp"
             android:textColor="#A59A9A"
             android:textSize="18sp"
@@ -128,7 +128,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="1dp"
             android:background="@null"
-            android:hint="@string/_7909043762"
+            android:hint=""
             android:padding="10dp"
             android:textColor="#A59A9A"
             android:textSize="18sp"

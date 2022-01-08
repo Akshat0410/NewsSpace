@@ -15,8 +15,12 @@ class UserDao {
     fun addUser(user: User?){
         user?.let{
             GlobalScope.launch(Dispatchers.IO){
-                userCollection.add(user)
+                userCollection.document(user.uId).set(user)
             }
         }
+    }
+
+    fun getCurrentUser(user: User?){
+
     }
 }

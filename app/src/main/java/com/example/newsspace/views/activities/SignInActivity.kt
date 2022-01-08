@@ -1,7 +1,6 @@
-package com.example.newsspace.views
+package com.example.newsspace.views.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,16 +10,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.newsspace.R
 import com.example.newsspace.dao.UserDao
 import com.example.newsspace.models.User
+import com.example.newsspace.views.MainActivity
 import com.example.newsspace.views.viewmodels.SignInViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 
 
 class SignInActivity : AppCompatActivity() {
@@ -28,18 +28,16 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var viewModel: SignInViewModel
-    private lateinit var mPreference: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        initSignInButton()
-        initSignInViewModel()
         initFirebaseAuth()
+        initSignInViewModel()
+        initSignInButton()
 
-        mPreference = getPreferences(MODE_PRIVATE)
 
     }
 
@@ -72,11 +70,24 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.authenticatedUserLiveData?.observe(this, Observer {
-            if (it != null) {
-                updateUI(it)
-            }
-        })
+        if(auth.currentUser!=null){
+            updateUI(auth.currentUser)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(auth.currentUser!=null){
+            updateUI(auth.currentUser)
+        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if(auth.currentUser!=null){
+            updateUI(auth.currentUser)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -97,34 +108,32 @@ class SignInActivity : AppCompatActivity() {
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-        Log.d("thik hai","thik hai part 1")
         viewModel.signInWithGoogle(credential)
-        Log.d("thik hai","thik hai part 2")
         viewModel.authenticatedUserLiveData?.observe(this, Observer {
             if (it != null) {
                 val userdao= UserDao()
                 userdao.addUser(it)
-                updateUI(it)
+                updateUISignUp(it)
             }
         })
 
     }
 
-    private fun updateUI(user: User) {
-
-        Log.d("thik hai","thik hai part 3")
-        Log.d("thik hai name",user.userName.toString())
-        val prefsEditor: SharedPreferences.Editor = mPreference.edit()
-        val gson = Gson()
-        val json = gson.toJson(user)
-        Log.d("json cov",json.toString())
-        prefsEditor.putString("myaccount", json)
-        prefsEditor.apply()
+    private fun updateUISignUp(it: User) {
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if(user!=null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
 

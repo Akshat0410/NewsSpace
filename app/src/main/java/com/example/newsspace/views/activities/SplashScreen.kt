@@ -1,4 +1,4 @@
-package com.example.newsspace.views
+package com.example.newsspace.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

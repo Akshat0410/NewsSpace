@@ -1,4 +1,4 @@
-package com.example.newsspace.views
+package com.example.newsspace.views.fragments
 
 import android.os.Bundle
 import android.view.View
