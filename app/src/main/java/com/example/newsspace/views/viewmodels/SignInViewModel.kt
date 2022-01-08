@@ -14,10 +14,7 @@ import kotlinx.coroutines.launch
 class SignInViewModel : ViewModel() {
 
     var firebaseRepository : FirebaseRepository = FirebaseRepository()
-
     var authenticatedUserLiveData: LiveData<User>? = null
-
-
     fun signInWithGoogle(googleAuthCredential: AuthCredential?) {
         viewModelScope.launch(Dispatchers.IO){
             authenticatedUserLiveData = firebaseRepository.firebaseSignInWithGoogle(googleAuthCredential)

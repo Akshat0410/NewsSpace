@@ -7,6 +7,6 @@ data class Event(
     var eventPic: String = "",
     var eventDate: String = "",
     var timePosted: Long = 0L,
-    var totalLikes: List<String>,
+    var totalLikes: List<String>?=null,
     var societyId: String? = null
 )

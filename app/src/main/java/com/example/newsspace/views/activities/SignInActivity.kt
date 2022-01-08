@@ -53,7 +53,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun initSignInViewModel() {
-        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
+        viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
     }
 
     private fun initSignInButton() {

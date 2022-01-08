@@ -1,6 +1,8 @@
 package com.example.newsspace.repository
+
 import android.util.Log
 import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.newsspace.models.User
 import com.google.firebase.auth.AuthCredential
@@ -19,7 +21,7 @@ class FirebaseRepository {
     private val auth = FirebaseAuth.getInstance()
     private var authenticatedUserMutableLiveData: MutableLiveData<User> = MutableLiveData<User>()
     private var currentUserMutableLiveData: MutableLiveData<User> = MutableLiveData<User>()
-    private val db= FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
     private val userCollection = db.collection("users")
 
 
@@ -39,18 +41,18 @@ class FirebaseRepository {
 
         }
 
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             authenticatedUserMutableLiveData.value = user
-            currentUserMutableLiveData.value=user
+            currentUserMutableLiveData.value = user
         }
 
         return authenticatedUserMutableLiveData
     }
 
 
-    suspend fun getCurrentUserWithUid(uId: String): MutableLiveData<User> {
+    fun getCurrentUserWithUid(uId: String): LiveData<User> {
         userCollection.document(uId).get().addOnSuccessListener {
-            currentUserMutableLiveData.value = it.toObject<User>()
+            currentUserMutableLiveData.value = it.toObject(User::class.java)
             Log.d("Success", currentUserMutableLiveData.value.toString())
 
         }.addOnFailureListener {

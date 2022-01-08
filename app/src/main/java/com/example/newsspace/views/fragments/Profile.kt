@@ -38,7 +38,7 @@ class Profile : Fragment() {
     }
 
     private fun initProfileViewModel() {
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
     }
 
     private fun handleEditClicks() {
@@ -51,7 +51,7 @@ class Profile : Fragment() {
     private fun handleUserProfileData(uId: String) {
 
         viewModel.getCurrentLoggedInUser(uId)
-        viewModel.user?.observe(requireActivity(), Observer{
+        viewModel.user?.observe(viewLifecycleOwner, Observer{
             binding.userName.text=it.userName
             binding.userEmail.text=it.userEmail
             binding.userPhone.text=it.userPhone
