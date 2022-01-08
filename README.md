@@ -14,8 +14,11 @@ This project proposes an "Event Creation and Display" to keep track of all the e
 
 Sample Images
 
-Functionalities & Concepts used :
+:![four](https://user-images.githubusercontent.com/62508858/148656983-56b54b93-4b4f-4ce9-a122-24ec1d8a63c8.jpeg) ![one](https://user-images.githubusercontent.com/62508858/148656984-cdcd69f6-a079-48c7-8a04-5bbb02101206.jpeg)
+![three](https://user-images.githubusercontent.com/62508858/148656986-af00d761-f12e-4024-afb5-a90952b9533e.jpeg)
+![two](https://user-images.githubusercontent.com/62508858/148656987-236897f3-30de-4c4f-92ba-53327c7b2de2.jpeg)
 
+Functionalities & Concepts used 
 The App has a very simple and interactive User interface which helps the students to view the list of existing events, register for them or to suggest new events to the concerned Clubs and Societies. Following are a few of the Android concepts used to achieve the functionalities in the App :
 Constraint Layout : Most of the activities in the app uses a flexible constraint layout, which is easy to handle for different screen sizes.
 Simple & Easy Views Design : Use of Google sign in Option to make it easier for the students to register or sign in without providing any detailed instructions pages. 
