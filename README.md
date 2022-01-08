@@ -1,5 +1,7 @@
 # NewsSpace # Android Study Jam
 
+![FINAL!@@](https://user-images.githubusercontent.com/62508858/148656829-b8dec8b6-8a75-4d65-9e0f-af931e5071a4.png)
+
 An Event Creation and Display App for all Student Clubs and Societies 
 
 Problem Statement:
