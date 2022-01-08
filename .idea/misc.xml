@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2046875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/drawable/newsspacelogo.xml" value="0.1" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/layout/activity_splash_screen.xml" value="0.19746376811594202" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/layout/fragment_profile.xml" value="0.16" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/layout/fragment_societies.xml" value="0.1" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/NewsSpace/app/src/main/res/menu/bottom_nav_menu.xml" value="0.16" />
+        <entry key="..\:/Users/dell/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

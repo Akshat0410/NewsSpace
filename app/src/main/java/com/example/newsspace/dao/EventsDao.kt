@@ -23,8 +23,8 @@ class EventsDao {
         GlobalScope.launch {
             val user = userDao.getUserById(currentUserId).await().toObject(User::class.java)
             val currTime = System.currentTimeMillis()
-            val event = Event("", title, eventDesc, eventPic, eventDate, currTime, null, user!!.uId)
-            postCollection.document(user.uId).set(event)
+            val event = Event("", title, eventDesc, eventPic, eventDate, currTime, null,user?.userName )
+            postCollection.document(user!!.uId).set(event)
         }
 
 

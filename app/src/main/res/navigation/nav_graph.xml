@@ -28,5 +28,9 @@
         android:id="@+id/createEventFragment"
         android:name="com.example.newsspace.views.fragments.CreateEventFragment"
         android:label="fragment_create_event"
-        tools:layout="@layout/fragment_create_event" />
+        tools:layout="@layout/fragment_create_event" >
+        <action
+            android:id="@+id/action_createEventFragment_to_feedsFragment"
+            app:destination="@id/feedsFragment" />
+    </fragment>
 </navigation>

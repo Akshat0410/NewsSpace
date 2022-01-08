@@ -68,6 +68,16 @@ class Societies : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        initGetUser()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initGetUser()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

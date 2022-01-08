@@ -9,4 +9,15 @@
     <string name="phone_number">Phone Number</string>
     <string name="_7909043762">7909043762</string>
     <string name="profile">Profile</string>
+
+    <string-array name="society_name">
+        <item>Dristi NGO</item>
+        <item>GeeksforGeeks Student Chapter</item>
+        <item>IEEE Student Branch</item>
+        <item>Literary Society</item>
+        <item>Dramatics Society</item>
+        <item>Music Society</item>
+        <item>Automobile Society</item>
+        <item>Dance Society</item>
+    </string-array>
 </resources>
