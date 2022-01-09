@@ -1,13 +1,17 @@
-package com.example.newsspace.views
+package com.example.newsspace.views.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.newsspace.R
 import com.example.newsspace.dao.UserDao
 import com.example.newsspace.models.User
+import com.example.newsspace.views.MainActivity
+import com.example.newsspace.views.viewmodels.SignInViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,23 +21,27 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
+
 
 class SignInActivity : AppCompatActivity() {
 
-    private lateinit var auth:FirebaseAuth
+    private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var viewModel: SignInViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        val button = findViewById<Button>(R.id.signInButton)
+        initFirebaseAuth()
+        initSignInViewModel()
+        initSignInButton()
 
+
+    }
+
+    private fun initFirebaseAuth() {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("344379595880-vual1i7l79s5e7p0bcbklqc4jbgaspl2.apps.googleusercontent.com")
@@ -42,14 +50,17 @@ class SignInActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         auth = Firebase.auth
+    }
 
+    private fun initSignInViewModel() {
+        viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
+    }
+
+    private fun initSignInButton() {
+        val button = findViewById<Button>(R.id.signInButton)
         button.setOnClickListener {
-
             signIn()
-
         }
-
-
     }
 
     private fun signIn() {
@@ -59,9 +70,26 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
+        if(auth.currentUser!=null){
+            updateUI(auth.currentUser)
+        }
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(auth.currentUser!=null){
+            updateUI(auth.currentUser)
+        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if(auth.currentUser!=null){
+            updateUI(auth.currentUser)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -77,32 +105,37 @@ class SignInActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        GlobalScope.launch(Dispatchers.IO) {
-            val auth = auth.signInWithCredential(credential).await()
-            val firebaseUser = auth.user
-            withContext(Dispatchers.Main) {
-                updateUI(firebaseUser)
+        viewModel.signInWithGoogle(credential)
+        viewModel.authenticatedUserLiveData?.observe(this, Observer {
+            if (it != null) {
+                val userdao= UserDao()
+                userdao.addUser(it)
+                updateUISignUp(it)
             }
-        }
+        })
+
     }
 
-    private fun updateUI(firebaseUser: FirebaseUser?) {
+    private fun updateUISignUp(it: User) {
 
-        if(firebaseUser!=null){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
 
-            val user= User(firebaseUser.uid,firebaseUser.displayName,firebaseUser.photoUrl.toString(),firebaseUser.email,false)
-            val userDao=UserDao()
-            userDao.addUser(user)
-            val intent=Intent(this, MainActivity::class.java)
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if(user!=null){
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }else{
-            Log.d(TAG,"User is null")
         }
 
     }
+
 
     companion object {
         private const val TAG = "GoogleActivity"

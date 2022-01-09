@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/feedsFragment">
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.newsspace.views.fragments.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/feedsFragment"
+        android:name="com.example.newsspace.views.fragments.FeedsFragment"
+        android:label="fragment_feeds"
+        tools:layout="@layout/fragment_feeds" />
+    <fragment
+        android:id="@+id/societies"
+        android:name="com.example.newsspace.views.fragments.Societies"
+        android:label="fragment_societies"
+        tools:layout="@layout/fragment_societies" >
+        <action
+            android:id="@+id/action_societies_to_createEventFragment"
+            app:destination="@id/createEventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventFragment"
+        android:name="com.example.newsspace.views.fragments.CreateEventFragment"
+        android:label="fragment_create_event"
+        tools:layout="@layout/fragment_create_event" >
+        <action
+            android:id="@+id/action_createEventFragment_to_feedsFragment"
+            app:destination="@id/feedsFragment" />
+    </fragment>
+</navigation>

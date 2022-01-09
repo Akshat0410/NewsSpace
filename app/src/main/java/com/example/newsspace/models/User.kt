@@ -5,5 +5,6 @@ data class User(
     var userName: String? = null,
     var userPic: String? = null ,
     var userEmail: String? =null,
+    var userPhone : String? = null,
     var canPost: Boolean = false
 )
